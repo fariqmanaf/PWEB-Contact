@@ -34,7 +34,6 @@ function showUpdateModal(id) {
     const noHp = row.getAttribute('data-no-hp');
     const owner = row.getAttribute('data-owner');
     const idEdit = row.getAttribute('data-id');
-    
 
     const modalUpdate = document.getElementById('modal-edit');
     const photoInput = document.getElementById('photo-edit');

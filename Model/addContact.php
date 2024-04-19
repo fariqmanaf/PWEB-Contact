@@ -6,11 +6,11 @@ class Data{
         global $conn;
         require_once __DIR__ . '/database.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+          if ($_POST["action"] == "create") {
             $photo=$_POST["photo"];
             $no_hp=$_POST["no_hp"];
             $owner=$_POST["owner"];
-    
+
             $sql="insert into contact (photo,no_hp,owner) values
             ('$photo','$no_hp','$owner')";
 
@@ -22,6 +22,7 @@ class Data{
             else {
                 echo "<div class='alert alert-danger'> Data Gagal disimpan.</div>";
             }
+          }
         }
     }
 }

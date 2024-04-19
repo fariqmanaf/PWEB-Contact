@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__. '/../../Model/contact.php';
 require_once __DIR__. '/../../Model/addContact.php';
+require_once __DIR__. '/../../Model/updateContact.php';
+require_once __DIR__. '/../../Model/deleteContact.php';
 $arr = Contact::select();
 ?>
 
@@ -70,7 +72,7 @@ $arr = Contact::select();
                 <?php
                     for ($i = 0; $i < count($arr['id_user']); $i++){
                 ?>
-                    <tr class="odd:bg-transparent border-b" data-id="<?= $i+1 ?>" data-photo="<?= $arr['photo'][$i] ?>" data-owner="<?= $arr['owner'][$i] ?>" data-no-hp="<?= $arr['no_hp'][$i] ?>">
+                    <tr class="odd:bg-transparent border-b" data-id="<?= $arr['id_user'][$i] ?>" data-photo="<?= $arr['photo'][$i] ?>" data-owner="<?= $arr['owner'][$i] ?>" data-no-hp="<?= $arr['no_hp'][$i] ?>">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-700 whitespace-nowrap">
                             <?= $i+1 ?>
                         </td>
@@ -108,8 +110,12 @@ $arr = Contact::select();
                     </div>
                     <div id="button-overview-<?= $i+1 ?>" class="button-overview hidden mt-6 flex justify-center flex-col gap-4 font-semibold">
                         <button class="text-indigo-600 border-indigo-600 border w-80 h-10 rounded-xl hover:bg-indigo-600 hover:text-white">Chat Contact</button>
-                        <button onclick="showUpdateModal(<?= $i+1 ?>)" id="edit-button-<?= $i+1 ?>" class="text-yellow-600 border-yellow-600 border w-80 h-10 rounded-xl hover:bg-yellow-600 hover:text-white">Edit Contact</button>
-                        <button class="text-red-600 border bg-transparent border-red-600 w-80 h-10 rounded-xl hover:bg-red-700 hover:text-white">Delete Contact</button>
+                        <button onclick="showUpdateModal(<?= $arr['id_user'][$i] ?>)" id="edit-button-<?= $arr['id_user'][$i] ?>" class="text-yellow-600 border-yellow-600 border w-80 h-10 rounded-xl hover:bg-yellow-600 hover:text-white">Edit Contact</button>
+                        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
+                            <input type="hidden" name="id_user_delete" value="<?= $arr['id_user'][$i] ?>">
+                            <input type="hidden" name="action" value="delete">
+                            <button class="text-red-600 border bg-transparent border-red-600 w-80 h-10 rounded-xl hover:bg-red-700 hover:text-white">Delete Contact</button>
+                        </form>
                     </div>
                 <?php } ?>
 
@@ -122,7 +128,7 @@ $arr = Contact::select();
     </div>
     </main>
     <!--  -->
-    <aside class="shadow-lg absolute top-0 w-20 bg-white h-screen rounded-r-3xl flex flex-col items-center">
+    <aside class="shadow-lg fixed top-0 w-20 bg-white h-screen rounded-r-3xl flex flex-col items-center">
         <img src="/resources/logo2.png" alt="logo" class="mx-auto h-10 w-auto mt-12">
         <div class="aside1 flex flex-col justify-center items-center gap-8 mt-14">
             <a href="" class="home hover:bg-indigo-600 border border-transparent p-1.5 rounded-xl"><span class="tooltiptext">Home</span><img width="28" class="hover:invert" height=auto src="https://img.icons8.com/parakeet-line/48/home.png" alt="home"/></a>
@@ -144,6 +150,7 @@ $arr = Contact::select();
             </div>
             <div class="modal-body">
                 <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST" class="flex flex-col items-center gap-2 text-sm">
+                    <input type="hidden" name="action" value="create">
                     <label for="photo">Masukkan Link Foto</label>
                     <input type="text" id="photo" name="photo" class="rounded-full border-transparent bg-gray-200">
                     <label for="no-hp">No HP</label>
@@ -163,13 +170,15 @@ $arr = Contact::select();
                 <h2 class="text-center text-indigo-600 font-bold text-lg mb-3">Edit Contact</h2>
             </div>
             <div class="modal-body">
-                <form action="" class="flex flex-col items-center gap-2 text-sm">
+                <form action="update" method="POST" class="flex flex-col items-center gap-2 text-sm">
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" id="id-edit" name="id_edit">
                     <label for="photo">Masukkan Link Foto</label>
-                    <input type="text" id="photo-edit" name="photo-edit" class="rounded-full border-transparent bg-gray-200">
+                    <input type="text" id="photo-edit" name="photo_edit" class="rounded-full border-transparent bg-gray-200">
                     <label for="no-hp">No HP</label>
-                    <input type="text" id="no-hp-edit" name="no-hp-edit" class="rounded-full border-transparent bg-gray-200">
+                    <input type="text" id="no-hp-edit" name="no_hp_edit" class="rounded-full border-transparent bg-gray-200">
                     <label for="owner">Owner</label>
-                    <input type="text" id="owner-edit" name="owner-edit" class="rounded-full border-transparent bg-gray-200 mb-5">
+                    <input type="text" id="owner-edit" name="owner_edit" class="rounded-full border-transparent bg-gray-200 mb-5">
                     <button type="submit" class="p-2 w-44 bg-indigo-600 rounded-2xl text-white font-semibold">Update</button>
                 </form>
             </div>
