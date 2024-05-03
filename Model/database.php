@@ -1,13 +1,12 @@
 <?php
+require_once 'Config/env.php';
 
-$host = 'localhost';
-$username = 'root';
-$password = '';
+$host = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+$database = $_ENV['DB_NAME'];
 
-$database = 'contact';
 $conn = new mysqli($host, $username, $password, $database);
-
-if ($conn->connect_error){
-  die("koneksi database gagal: ".$conn->connect_error);
+if ($conn->connect_error) {
+    die("Koneksi database gagal: " . $conn->connect_error);
 }
-?>

@@ -12,7 +12,7 @@ $arr = Contact::select();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="Dashboard/style3.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> 
@@ -200,5 +200,111 @@ $arr = Contact::select();
     close.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
+
+    const overviewButtons = document.querySelectorAll('button[onclick^="displayContact"]');
+
+overviewButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        displayContact(index + 1);
+    });
+});
+
+function displayContact(id) {
+    const overviewContents = document.querySelectorAll('.overview-content');
+    const buttonActions = document.querySelectorAll('.button-overview');
+    overviewContents.forEach(content => content.style.display = 'none');
+    buttonActions.forEach(action => action.style.display = 'none');
+
+    const selectedOverview = document.getElementById(`overview-${id}`);
+    const selectedButtonAction = document.getElementById(`button-overview-${id}`);
+    selectedOverview.style.display = 'flex';
+    selectedButtonAction.style.display = 'flex';
+
+    const nothingElement = document.getElementById('nothing');
+    nothingElement.style.display = 'none';
+}
+
+function showUpdateModal(id) {
+    const editButtons = document.querySelector(`#edit-button-${id}`);
+    const closeEdit = document.getElementById('close-update');
+
+    editButtons.addEventListener('click', () => {
+        showUpdateModal(id);
+    });
+
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    const photo = row.getAttribute('data-photo');
+    const noHp = row.getAttribute('data-no-hp');
+    const owner = row.getAttribute('data-owner');
+    const idEdit = row.getAttribute('data-id');
+
+    const modalUpdate = document.getElementById('modal-edit');
+    const photoInput = document.getElementById('photo-edit');
+    const noHpInput = document.getElementById('no-hp-edit');
+    const ownerInput = document.getElementById('owner-edit');
+    const idInput = document.getElementById('id-edit');
+
+    photoInput.value = photo;
+    noHpInput.value = noHp;
+    ownerInput.value = owner;
+    idInput.value = idEdit;
+
+    modalUpdate.classList.remove('hidden');
+
+    closeEdit.addEventListener('click', () => {
+        modalUpdate.classList.add('hidden');
+    });
+}
 </script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html{
+  height: 100%;
+}
+
+.invert { filter: invert(100%); }
+
+a:hover{
+  img{
+    filter: invert(100%);
+  }
+}
+
+.main{
+  height: 40vw;
+}
+
+.header{
+  height: 8vw;
+}
+
+.overview{
+  height: 495px;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  left: 70px;
+}
+
+.home:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
 </html>

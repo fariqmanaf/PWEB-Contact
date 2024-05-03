@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /PWEB-CONTACT/
+RewriteRule ^index\\.php$ - [L]
+RewrteCond %{REQUEST_FILENAME} !-f
+RewrteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /PWEB-CONTACT/index.php [L]
