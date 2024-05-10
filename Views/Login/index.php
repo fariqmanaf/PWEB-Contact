@@ -29,7 +29,7 @@
       <h1 class="text-3xl font-semibold">Welcome Back!</h1>
       <p class="text-sm text-slate-400">To keep connected with us please login</p>
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="/app/Dashboard/index.html">
+        <form class="space-y-6" action="" method="post">
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
             <div class="mt-2">
@@ -52,7 +52,7 @@
             </div>
           </div>
           <div>
-            <a href="/Views/Dashboard/index.php"><button type="button" class="flex w-96 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button></a>
+            <button type="submit" class="flex w-96 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
           </div>
         </form>
       </div>
@@ -67,7 +67,7 @@
 <!--  -->
   <footer class="flex flex-row items-center justify-center mt-10">
       <div class="footer1 flex flex-row w-6/12 justify-center items-center ml-10">
-        <p class="-ml-10 text-sm text-slate-400">Don't have an account yet? <a href="/Views/Register/index.php" class="text-sm text-black font-bold"> Create a MyContact account</a></p>
+        <p class="-ml-10 text-sm text-slate-400">Don't have an account yet? <a href="<?= urlpath('register') ?>" class="text-sm text-black font-bold"> Create a MyContact account</a></p>
       </div>
       <div class="contact flex flex-row text-sm w-6/12 justify-center items-center">
         <p class="text-slate-400">Got question? </p>

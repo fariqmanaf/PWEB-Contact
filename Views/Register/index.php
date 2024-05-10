@@ -29,20 +29,20 @@
       <h1 class="text-2xl font-semibold">Happy To See You Here!</h1>
       <p class="text-sm text-slate-400">Let's get started by register yourself</p>
       <div class="mt-7 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" action="">
+        <form class="space-y-6" action="" method="post">
 
           <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div class="sm:col-span-3">
               <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
               <div class="mt-2">
-                <input placeholder="Your First Name" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <input placeholder="Your First Name" type="text" name="firstname" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
             </div>
       
             <div class="sm:col-span-3">
               <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
               <div class="mt-2">
-                <input placeholder="Your Last Name" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <input placeholder="Your Last Name" type="text" name="lastname" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
               <input placeholder="example@mail.com" id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
           </div>
-    
+
           <div>
             <div class="flex items-center justify-between">
               <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div>
-            <a href="/Views/Login/index.php"><button type="button" class="flex w-96 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button></a>
+            <button type="submit" class="flex w-96 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</button>
             <p class="text-xs text-indigo-500 mt-2 text-center">By clicking register you know our term & condition</p>
           </div>
         </form>
@@ -79,7 +79,7 @@
 <!--  -->
 <footer class="flex flex-row items-center justify-center mt-10">
   <div class="footer1 flex flex-row w-6/12 justify-center items-center ml-10">
-    <p class="-ml-10 text-sm text-slate-400">Already have an account? <a href="/Views/Login/index.php" class="text-sm text-black font-bold"> Sign In MyContact Account Here</a></p>
+    <p class="-ml-10 text-sm text-slate-400">Already have an account? <a href="<?= urlpath('login') ?>" class="text-sm text-black font-bold"> Sign In MyContact Account Here</a></p>
   </div>
   <div class="contact flex flex-row text-sm w-6/12 justify-center items-center">
     <p class="text-slate-400">Got question? </p>

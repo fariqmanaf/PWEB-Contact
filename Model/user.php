@@ -1,56 +1,47 @@
 <?php
-include_once __DIR__ . '/database.php';
 
-class User
-{
-    static function login($data = [])
-    {
+include_once 'database.php';
+
+class User {
+    static function login($data=[]) {
+        extract($data);
         global $conn;
-    
-        $username = $data['username'];
-        $password = $data['password'];
-    
-        $result = $conn->query("SELECT * FROM users WHERE username = '$username'");
+
+        $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
         if ($result = $result->fetch_assoc()) {
-            $hashedPassword = $result['password'];
-            $verify = password_verify($password, $hashedPassword);
-            if ($verify) {
+            if ($password == $result['password']) {
                 return $result;
-            } else {
-                return false;
             }
+            else { return false; }
         }
+        else { return false; }
     }
-    
-    static function register($data = [])
-    {
+
+    static function register($data=[]) {
+        extract($data);
         global $conn;
-
-        $username = $data['username'];
-        $password = $data['password'];
-        $full_name = $data['full_name'];
-        $phone = $data['phone'];
-        $email = $data['email'];
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users SET full_name = ?, username = ?, password = ?, phone = ?, email = ?";
+        
+        $sql = "INSERT INTO users SET firstname = ?, lastname = ?, email = ?, password = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssss', $full_name, $username, $hashedPassword, $phone, $email);
+        $stmt->bind_param('ssss', $firstname, $lastname, $email, $password);
         $stmt->execute();
 
         $result = $stmt->affected_rows > 0 ? true : false;
         return $result;
     }
 
-    static function getPassword($username)
-    {
+    static function getPassword($email) { 
         global $conn;
-        $sql = "SELECT password FROM users WHERE username = ?";
+        $sql = "SELECT password FROM users WHERE email = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('s', $username);
+        $stmt->bind_param('s', $email);
         $stmt->execute();
 
         $result = $stmt->affected_rows > 0 ? true : false;
         return $result;
     }
+
+    static function update($data=[]) {}
+
+    static function delete($id='') {}
 }

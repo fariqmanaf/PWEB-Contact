@@ -1,8 +1,5 @@
 <?php
 require_once __DIR__. '/../../Model/contact.php';
-require_once __DIR__. '/../../Model/addContact.php';
-require_once __DIR__. '/../../Model/updateContact.php';
-require_once __DIR__. '/../../Model/deleteContact.php';
 $arr = Contact::select();
 ?>
 
@@ -111,7 +108,7 @@ $arr = Contact::select();
                     <div id="button-overview-<?= $i+1 ?>" class="button-overview hidden mt-6 flex justify-center flex-col gap-4 font-semibold">
                         <button class="text-indigo-600 border-indigo-600 border w-80 h-10 rounded-xl hover:bg-indigo-600 hover:text-white">Chat Contact</button>
                         <button onclick="showUpdateModal(<?= $arr['id_user'][$i] ?>)" id="edit-button-<?= $arr['id_user'][$i] ?>" class="text-yellow-600 border-yellow-600 border w-80 h-10 rounded-xl hover:bg-yellow-600 hover:text-white">Edit Contact</button>
-                        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST">
+                        <form action="" method="POST">
                             <input type="hidden" name="id_user_delete" value="<?= $arr['id_user'][$i] ?>">
                             <input type="hidden" name="action" value="delete">
                             <button class="text-red-600 border bg-transparent border-red-600 w-80 h-10 rounded-xl hover:bg-red-700 hover:text-white">Delete Contact</button>
@@ -138,7 +135,7 @@ $arr = Contact::select();
         </div>
         <div class="aside2 flex flex-col justify-center items-center gap-6 mt-32">
             <a href="" class="home hover:bg-indigo-600 border border-transparent p-1.5 rounded-xl"><span class="tooltiptext">Profile</span><img class="hover:invert" width="28" height=auto src="https://img.icons8.com/ios/50/gender-neutral-user--v1.png" alt="settings--v1"/></a>
-            <a href="/Views/Login/index.php" class="home hover:bg-red-600 border border-transparent p-1.5 rounded-xl"><span class="tooltiptext">Logout</span><img class="hover:invert" width="26" height=auto src="https://img.icons8.com/ios/50/logout-rounded-left.png" alt="logout-rounded-left"/></a>
+            <a href="<?= urlpath('logout') ?>" class="home hover:bg-red-600 border border-transparent p-1.5 rounded-xl"><span class="tooltiptext">Logout</span><img class="hover:invert" width="26" height=auto src="https://img.icons8.com/ios/50/logout-rounded-left.png" alt="logout-rounded-left"/></a>
         </div>
     </aside>
     <!--  -->
@@ -149,7 +146,7 @@ $arr = Contact::select();
                 <h2 class="text-center text-indigo-600 font-bold text-lg mb-3">Add Contact</h2>
             </div>
             <div class="modal-body">
-                <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST" class="flex flex-col items-center gap-2 text-sm">
+                <form action="" method="POST" class="flex flex-col items-center gap-2 text-sm">
                     <input type="hidden" name="action" value="create">
                     <label for="photo">Masukkan Link Foto</label>
                     <input type="text" id="photo" name="photo" class="rounded-full border-transparent bg-gray-200">
@@ -170,7 +167,7 @@ $arr = Contact::select();
                 <h2 class="text-center text-indigo-600 font-bold text-lg mb-3">Edit Contact</h2>
             </div>
             <div class="modal-body">
-                <form action="update" method="POST" class="flex flex-col items-center gap-2 text-sm">
+                <form action="/dashboard" method="POST" class="flex flex-col items-center gap-2 text-sm">
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" id="id-edit" name="id_edit">
                     <label for="photo">Masukkan Link Foto</label>
